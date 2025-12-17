@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.
 public class StudentController{
     @Autowired
     StudentService st;
@@ -22,6 +23,23 @@ public class StudentController{
     }
     @PutMapping("/update/{id}")
     public String update(@RequestBody StudentEntity student,@PathVariable int id){
-        Optional<StudentEntity> existingStudent=st
+        Optional<StudentEntity> existingStudent=st.getStudentById(id);
+        if(existingStudent.isPresent()){
+            student.setId(id);
+            st.insertStudent(student);
+            return "Student updated successfully";
+        }else{
+            return "Student not found";
+        }
+    }
+    @DeleteMapping("/delete/{id}")
+    public String delete(@PathVariable int id){
+        Optional<StudentEntity> student=st.getStudentById(id);
+        if(student.isPresent()){
+            st.deleteStudentById(id);
+            return "Student deleted successfully";
+        }else{
+            return "Student not found";
+        }
     }
 }
