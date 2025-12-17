@@ -16,5 +16,12 @@ public class StudentController{
     public List<StudentEntity>getAllStudents(){
         return st.getAllStudentEntity();
     }
-    
+    @GetMapping("/get/{id}")
+    public Optional<StudentEntity>get(@PathVariable int id){
+        return st.getStudentById(id);
+    }
+    @PutMapping("/update/{id}")
+    public String update(@RequestBody StudentEntity student,@PathVariable int id){
+        Optional<StudentEntity> existingStudent=st
+    }
 }
