@@ -1,6 +1,6 @@
-package com.example.demo.controller
+package com.example.demo.
 
-import java.util.List
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
