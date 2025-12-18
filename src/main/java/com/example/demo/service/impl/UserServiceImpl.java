@@ -1,4 +1,4 @@
-package com.example.demo.service.impl;
+package com.example.demo.serviceimpl;
 
 import java.util.List;
 
@@ -20,14 +20,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(User user) {
-
+    public User saveUser(User user) {
         if (user.getRole() == null) {
             user.setRole("USER");
         }
-
         user.setPassword(encoder.encode(user.getPassword()));
-
         return userRepository.save(user);
     }
 
@@ -39,18 +36,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(Long id) {
         return userRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    public User updateUser(Long id, User user) {
-        User existing = userRepository.findById(id).orElse(null);
-        if (existing == null) return null;
-
-        existing.setName(user.getName());
-        existing.setEmail(user.getEmail());
-        existing.setRole(user.getRole());
-
-        return userRepository.save(existing);
     }
 
     @Override
